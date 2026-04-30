@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
+import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
 import { searchMeasurements, measurements as allMeasurements, Measurement } from "@/data/measurements"
 
@@ -140,8 +141,7 @@ function MeasureModal({ onComplete, onClose }: { onComplete: () => void; onClose
       >
         {phase === "ready" && (
           <>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>👃</div>
-            <div style={{ fontSize: 17, fontWeight: 600, marginBottom: 8 }}>匂いを測定する</div>
+            <div style={{ fontSize: 17, fontWeight: 600, marginBottom: 8, color: "#1a1a1a" }}>匂いを測定する</div>
             <div style={{ fontSize: 13, color: "#70757a", marginBottom: 28 }}>
               現在地の匂いをセンサーで計測します
             </div>
@@ -182,6 +182,11 @@ export default function Page() {
   const [hasSearched, setHasSearched] = useState(false)
   const [showMeasureModal, setShowMeasureModal] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setShowMeasureModal(false)
+  }, [pathname])
 
   useEffect(() => {
     if (!hasSearched) inputRef.current?.focus()
@@ -259,7 +264,7 @@ export default function Page() {
                 letterSpacing: 2,
               }}
             >
-              👃 測定
+              測定
             </button>
           </div>
 
@@ -380,7 +385,7 @@ export default function Page() {
             boxShadow: "0 2px 8px rgba(66,133,244,.35)",
           }}
         >
-          👃 測定
+          測定
         </button>
       </div>
 

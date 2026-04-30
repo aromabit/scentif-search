@@ -58,6 +58,9 @@ function ResultCard({
   return (
     <div
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick() }}
       style={{
         padding: "12px 16px",
         borderBottom: "1px solid #e8e8e8",
@@ -118,13 +121,16 @@ function MeasureModal({ onComplete, onClose }: { onComplete: () => void; onClose
 
   return (
     <div
+      role="presentation"
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === "Escape") onClose() }}
       style={{
         position: "fixed", inset: 0, background: "rgba(0,0,0,.45)",
         display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100,
       }}
     >
       <div
+        role="presentation"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "white", borderRadius: 16, padding: "36px 40px",
@@ -171,7 +177,6 @@ function MeasureModal({ onComplete, onClose }: { onComplete: () => void; onClose
 
 export default function Page() {
   const [query, setQuery] = useState("")
-  const [inputValue, setInputValue] = useState("")
   const [results, setResults] = useState<Measurement[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
@@ -182,7 +187,7 @@ export default function Page() {
     if (!hasSearched) inputRef.current?.focus()
   }, [hasSearched])
 
-  function handleSearch(q: string) {
+  const handleSearch = useCallback((q: string) => {
     const trimmed = q.trim()
     if (!trimmed) return
     setQuery(trimmed)
@@ -190,22 +195,17 @@ export default function Page() {
     setResults(found)
     setSelectedId(found[0]?.id ?? null)
     setHasSearched(true)
-  }
+  }, [])
 
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "Enter") handleSearch(inputValue)
-  }
-
-  function handleSuggestion(keyword: string) {
-    setInputValue(keyword)
+  const handleSuggestion = useCallback((keyword: string) => {
     handleSearch(keyword)
-  }
+  }, [handleSearch])
 
   const handleMeasureComplete = useCallback(() => {
     setShowMeasureModal(false)
     const r = allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
     handleSuggestion(r.scentType.split("・")[0])
-  }, [])
+  }, [handleSuggestion])
 
   if (!hasSearched) {
     return (
@@ -296,6 +296,9 @@ export default function Page() {
                 <div
                   key={m.id}
                   onClick={() => handleSuggestion(m.locationName)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleSuggestion(m.locationName) }}
                   style={{
                     padding: "10px 12px",
                     borderBottom: "1px solid #e8e8e8",
@@ -343,7 +346,7 @@ export default function Page() {
         }}
       >
         <button
-          onClick={() => { setHasSearched(false); setInputValue("") }}
+          onClick={() => setHasSearched(false)}
           style={{
             fontSize: 20,
             fontWeight: 700,

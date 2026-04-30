@@ -10,6 +10,7 @@ export type Measurement = {
   notes: string
   lat: number
   lng: number
+  imageUrl?: string
 }
 
 export const measurements: Measurement[] = [
@@ -25,6 +26,7 @@ export const measurements: Measurement[] = [
     notes: "朝露残り、芝生と腐葉土の混合香。風弱く拡散少なめ。",
     lat: 35.6717,
     lng: 139.6952,
+    imageUrl: "https://picsum.photos/seed/yoyogi/600/300",
   },
   {
     id: "2",
@@ -38,6 +40,7 @@ export const measurements: Measurement[] = [
     notes: "水産業者の搬入時間帯。鰹節だしと磯の香りが混在。",
     lat: 35.6655,
     lng: 139.7706,
+    imageUrl: "https://picsum.photos/seed/tsukiji/600/300",
   },
   {
     id: "3",
@@ -51,6 +54,7 @@ export const measurements: Measurement[] = [
     notes: "白梅8割開花。南風時に強く香る。紅梅はやや控えめ。",
     lat: 35.7328,
     lng: 139.7466,
+    imageUrl: "https://picsum.photos/seed/rikugien/600/300",
   },
   {
     id: "4",
@@ -64,6 +68,7 @@ export const measurements: Measurement[] = [
     notes: "ピーク人流時。屋台の焼き鳥とフライドポテトが支配的。香水は歩行者通過で断片的に検出。",
     lat: 35.6595,
     lng: 139.7005,
+    imageUrl: "https://picsum.photos/seed/shibuya/600/300",
   },
   {
     id: "5",
@@ -77,6 +82,7 @@ export const measurements: Measurement[] = [
     notes: "満潮後2時間。潮香と松林の樹脂香が重なる。菜の花花壇から甘味を補足。",
     lat: 35.6558,
     lng: 139.7634,
+    imageUrl: "https://picsum.photos/seed/hamarikyu/600/300",
   },
   {
     id: "6",
@@ -90,6 +96,7 @@ export const measurements: Measurement[] = [
     notes: "料亭密集エリア。老舗の鰹だし排気と古い木造建築の材木香。雨上がり直後で土香も混入。",
     lat: 35.7019,
     lng: 139.7395,
+    imageUrl: "https://picsum.photos/seed/kagurazaka/600/300",
   },
   {
     id: "7",
@@ -103,6 +110,7 @@ export const measurements: Measurement[] = [
     notes: "北東風強め。東京湾特有のやや工業的な塩香。来場者の日焼け止めが後追いで検出。",
     lat: 35.6296,
     lng: 139.7747,
+    imageUrl: "https://picsum.photos/seed/odaiba/600/300",
   },
   {
     id: "8",
@@ -116,6 +124,7 @@ export const measurements: Measurement[] = [
     notes: "昼前ピーク。コロッケ店の揚げ油香が最強。仏具店隣接区画で線香香が交差。",
     lat: 35.7268,
     lng: 139.7681,
+    imageUrl: "https://picsum.photos/seed/yanaka/600/300",
   },
   {
     id: "9",
@@ -129,6 +138,7 @@ export const measurements: Measurement[] = [
     notes: "散桜後5日。水面の微生物活動による土臭と、枯れ始めた桜花弁の甘い腐敗香が微量混合。",
     lat: 35.6996,
     lng: 139.5752,
+    imageUrl: "https://picsum.photos/seed/inokashira/600/300",
   },
   {
     id: "10",
@@ -142,6 +152,7 @@ export const measurements: Measurement[] = [
     notes: "ブティック集中エリア。ショップ入口から漏れる展示香が断続的に検出。カフェテラス由来のエスプレッソ香と競合。",
     lat: 35.6693,
     lng: 139.7638,
+    imageUrl: "https://picsum.photos/seed/ginza/600/300",
   },
 ]
 

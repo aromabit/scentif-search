@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import dynamic from "next/dynamic"
 import { searchMeasurements, measurements as allMeasurements, Measurement } from "@/data/measurements"
 
@@ -71,6 +72,17 @@ function ResultCard({
         transition: "background 0.15s",
       }}
     >
+      {measurement.imageUrl && (
+        <div style={{ position: "relative", width: "100%", height: 160, marginBottom: 10, borderRadius: 8, overflow: "hidden" }}>
+          <Image
+            src={measurement.imageUrl}
+            alt={measurement.locationName}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="380px"
+          />
+        </div>
+      )}
       <div style={{ fontWeight: 600, fontSize: 15, color: "#1a0dab", marginBottom: 2 }}>
         {measurement.locationName}
       </div>

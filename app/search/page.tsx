@@ -1,9 +1,9 @@
 "use client"
 
-import { Suspense, useState, useEffect } from "react"
+import { Suspense, useState, useMemo } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
-import { searchMeasurements, measurements as allMeasurements, Measurement } from "@/data/measurements"
+import { searchMeasurements, measurements as allMeasurements } from "@/data/measurements"
 import { ResultCard } from "@/components/search/ResultCard"
 import { MeasureModal } from "@/components/search/MeasureModal"
 
@@ -55,15 +55,17 @@ function SearchResults() {
   const searchParams = useSearchParams()
   const query = searchParams.get("q") ?? ""
 
-  const [results, setResults] = useState<Measurement[]>([])
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const results = useMemo(() => searchMeasurements(query), [query])
+  const [selectedEntry, setSelectedEntry] = useState<{ query: string; id: string | null }>(() => ({
+    query,
+    id: searchMeasurements(query)[0]?.id ?? null,
+  }))
   const [showMeasureModal, setShowMeasureModal] = useState(false)
 
-  useEffect(() => {
-    const found = searchMeasurements(query)
-    setResults(found)
-    setSelectedId(found[0]?.id ?? null)
-  }, [query])
+  const selectedId = selectedEntry.query === query ? selectedEntry.id : (results[0]?.id ?? null)
+  function setSelectedId(id: string | null) {
+    setSelectedEntry({ query, id })
+  }
 
   function handleMeasureComplete() {
     setShowMeasureModal(false)

@@ -50,8 +50,15 @@ export function ResultCard({
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginBottom: 6 }}>
         <span style={{ fontSize: 12, color: "#444" }}>📅 {dateStr} {timeStr}</span>
+        <span style={{ fontSize: 12, color: "#444" }}>📍 {measurement.lat.toFixed(4)}, {measurement.lng.toFixed(4)}</span>
+      </div>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginBottom: 6 }}>
         <span style={{ fontSize: 12, color: "#444" }}>🌡 {measurement.temperature}°C</span>
-        <span style={{ fontSize: 12, color: "#444" }}>💧 湿度{measurement.humidity}%</span>
+        <span style={{ fontSize: 12, color: "#444" }}>💧 {measurement.humidity}%</span>
+        <span style={{ fontSize: 12, color: "#444" }}>☀️ {measurement.illuminance.toLocaleString()}lx</span>
+        <span style={{ fontSize: 12, color: "#444" }}>💨 {measurement.windSpeed}m/s</span>
+        <span style={{ fontSize: 12, color: "#444" }}>🔊 {measurement.soundLevel}dB</span>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>

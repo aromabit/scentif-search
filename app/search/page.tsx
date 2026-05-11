@@ -16,8 +16,9 @@ const MapView = dynamic(() => import("@/components/search/MapView"), {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#f0f0f0",
-        color: "#999",
+        background: "#F5F2EE",
+        color: "#8C7B6B",
+        fontSize: 14,
       }}
     >
       地図を読み込み中...
@@ -30,22 +31,17 @@ function ScentifLogo({ onClick }: { onClick: () => void }) {
     <button
       onClick={onClick}
       style={{
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 700,
-        letterSpacing: -1,
+        letterSpacing: -0.5,
         background: "none",
         border: "none",
         cursor: "pointer",
         padding: 0,
+        color: "#1A1915",
       }}
     >
-      <span style={{ color: "#4285f4" }}>S</span>
-      <span style={{ color: "#ea4335" }}>c</span>
-      <span style={{ color: "#fbbc05" }}>e</span>
-      <span style={{ color: "#4285f4" }}>n</span>
-      <span style={{ color: "#34a853" }}>t</span>
-      <span style={{ color: "#ea4335" }}>i</span>
-      <span style={{ color: "#4285f4" }}>f</span>
+      Scentif
     </button>
   )
 }
@@ -74,7 +70,7 @@ function SearchResults() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", background: "white" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh", background: "#FAF9F7" }}>
       {showMeasureModal && (
         <MeasureModal
           onComplete={handleMeasureComplete}
@@ -86,11 +82,10 @@ function SearchResults() {
         style={{
           display: "flex",
           alignItems: "center",
-          padding: "8px 16px",
-          borderBottom: "1px solid #e8e8e8",
+          padding: "10px 20px",
+          borderBottom: "1.5px solid #E5E0D8",
           gap: 16,
           background: "white",
-          boxShadow: "0 1px 3px rgba(0,0,0,.1)",
           zIndex: 10,
         }}
       >
@@ -99,22 +94,22 @@ function SearchResults() {
         <button
           onClick={() => setShowMeasureModal(true)}
           style={{
-            padding: "8px 24px",
-            background: "#4285f4",
+            padding: "7px 20px",
+            background: "#D97757",
             border: "none",
             borderRadius: 20,
-            fontSize: 14,
-            fontWeight: 700,
+            fontSize: 13,
+            fontWeight: 600,
             color: "white",
             cursor: "pointer",
-            boxShadow: "0 2px 8px rgba(66,133,244,.35)",
+            boxShadow: "0 1px 6px rgba(217,119,87,.3)",
           }}
         >
-          測定
+          測定する
         </button>
       </div>
 
-      <div style={{ padding: "6px 16px 6px 24px", fontSize: 13, color: "#70757a", borderBottom: "1px solid #e8e8e8" }}>
+      <div style={{ padding: "8px 20px", fontSize: 12, color: "#8C7B6B", borderBottom: "1px solid #E5E0D8", background: "white" }}>
         「{query}」の測定記録 — {results.length} 件
       </div>
 
@@ -124,14 +119,15 @@ function SearchResults() {
             width: 380,
             minWidth: 280,
             overflowY: "auto",
-            borderRight: "1px solid #e8e8e8",
+            borderRight: "1.5px solid #E5E0D8",
             flexShrink: 0,
+            background: "white",
           }}
         >
           {results.length === 0 ? (
-            <div style={{ padding: 32, textAlign: "center", color: "#70757a" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-              <div style={{ fontSize: 16, marginBottom: 8 }}>該当する測定記録が見つかりませんでした</div>
+            <div style={{ padding: 40, textAlign: "center", color: "#8C7B6B" }}>
+              <div style={{ fontSize: 40, marginBottom: 16 }}>🔍</div>
+              <div style={{ fontSize: 15, marginBottom: 8, color: "#1A1915", fontWeight: 500 }}>測定記録が見つかりませんでした</div>
               <div style={{ fontSize: 13 }}>別のキーワードで試してみてください</div>
               <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
                 {["公園", "海", "市場", "雨上がり"].map((kw) => (
@@ -140,12 +136,13 @@ function SearchResults() {
                     onClick={() => router.push(`/search?q=${encodeURIComponent(kw)}`)}
                     style={{
                       padding: "6px 14px",
-                      background: "white",
-                      border: "1px solid #dfe1e5",
+                      background: "#FAF9F7",
+                      border: "1.5px solid #E5E0D8",
                       borderRadius: 20,
                       fontSize: 13,
-                      color: "#1a0dab",
+                      color: "#5C4F44",
                       cursor: "pointer",
+                      fontWeight: 500,
                     }}
                   >
                     {kw}
@@ -173,8 +170,8 @@ function SearchResults() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#f8f9fa",
-                color: "#9aa0a6",
+                background: "#F5F2EE",
+                color: "#8C7B6B",
                 fontSize: 14,
               }}
             >

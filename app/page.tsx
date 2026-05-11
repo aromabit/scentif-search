@@ -35,47 +35,42 @@ export default function Page() {
       <div
         style={{
           minHeight: "100vh",
-          background: "white",
+          background: "#FAF9F7",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: 32,
-          padding: "64px 16px 48px",
+          padding: "72px 16px 48px",
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 52, fontWeight: 700, letterSpacing: -2 }}>
-            <span style={{ color: "#4285f4" }}>S</span>
-            <span style={{ color: "#ea4335" }}>c</span>
-            <span style={{ color: "#fbbc05" }}>e</span>
-            <span style={{ color: "#4285f4" }}>n</span>
-            <span style={{ color: "#34a853" }}>t</span>
-            <span style={{ color: "#ea4335" }}>i</span>
-            <span style={{ color: "#4285f4" }}>f</span>
+          <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: -1.5, color: "#1A1915" }}>
+            Scentif
           </div>
-          <div style={{ fontSize: 14, color: "#70757a", marginTop: 4 }}>
+          <div style={{ fontSize: 14, color: "#8C7B6B", marginTop: 6, fontWeight: 400 }}>
             匂い測定記録を探そう
           </div>
         </div>
 
-        <div style={{ width: "100%", maxWidth: 584 }}>
+        <div style={{ width: "100%", maxWidth: 560 }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
               onClick={() => setShowMeasureModal(true)}
               style={{
-                padding: "16px 48px",
-                background: "#4285f4",
+                padding: "14px 44px",
+                background: "#D97757",
                 border: "none",
-                borderRadius: 32,
-                fontSize: 18,
-                fontWeight: 700,
+                borderRadius: 28,
+                fontSize: 16,
+                fontWeight: 600,
                 color: "white",
                 cursor: "pointer",
-                boxShadow: "0 4px 16px rgba(66,133,244,.4)",
-                letterSpacing: 2,
+                boxShadow: "0 2px 12px rgba(217,119,87,.35)",
+                letterSpacing: 1,
+                transition: "box-shadow 0.15s, transform 0.1s",
               }}
             >
-              測定
+              測定する
             </button>
           </div>
 
@@ -87,11 +82,12 @@ export default function Page() {
                 style={{
                   padding: "6px 16px",
                   background: "white",
-                  border: "1px solid #dfe1e5",
+                  border: "1.5px solid #E5E0D8",
                   borderRadius: 20,
                   fontSize: 13,
-                  color: "#1a0dab",
+                  color: "#5C4F44",
                   cursor: "pointer",
+                  fontWeight: 500,
                 }}
               >
                 {kw}
@@ -100,47 +96,51 @@ export default function Page() {
           </div>
         </div>
 
-        <div style={{ width: "100%", maxWidth: 584 }}>
-          <div style={{ fontSize: 13, color: "#70757a", marginBottom: 8, paddingLeft: 4 }}>最新の測定記録</div>
-          {[...allMeasurements]
-            .sort((a, b) => new Date(b.measuredAt).getTime() - new Date(a.measuredAt).getTime())
-            .map((m) => {
-              const dt = new Date(m.measuredAt)
-              const dateStr = dt.toLocaleDateString("ja-JP", { month: "2-digit", day: "2-digit" })
-              const timeStr = dt.toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" })
-              return (
-                <div
-                  key={m.id}
-                  onClick={() => handleSearch(m.locationName)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleSearch(m.locationName) }}
-                  style={{
-                    padding: "10px 12px",
-                    borderBottom: "1px solid #e8e8e8",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 12,
-                  }}
-                >
-                  <div style={{ fontSize: 11, color: "#70757a", whiteSpace: "nowrap", paddingTop: 2 }}>
-                    {dateStr} {timeStr}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: "#1a0dab", marginBottom: 2 }}>
-                      {m.locationName}
+        <div style={{ width: "100%", maxWidth: 560 }}>
+          <div style={{ fontSize: 12, color: "#8C7B6B", marginBottom: 10, paddingLeft: 2, fontWeight: 500, textTransform: "uppercase", letterSpacing: 0.5 }}>
+            最新の測定記録
+          </div>
+          <div style={{ background: "white", borderRadius: 16, border: "1.5px solid #E5E0D8", overflow: "hidden", boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+            {[...allMeasurements]
+              .sort((a, b) => new Date(b.measuredAt).getTime() - new Date(a.measuredAt).getTime())
+              .map((m, idx, arr) => {
+                const dt = new Date(m.measuredAt)
+                const dateStr = dt.toLocaleDateString("ja-JP", { month: "2-digit", day: "2-digit" })
+                const timeStr = dt.toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" })
+                return (
+                  <div
+                    key={m.id}
+                    onClick={() => handleSearch(m.locationName)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleSearch(m.locationName) }}
+                    style={{
+                      padding: "12px 16px",
+                      borderBottom: idx < arr.length - 1 ? "1px solid #F0EDE8" : "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 12,
+                    }}
+                  >
+                    <div style={{ fontSize: 11, color: "#8C7B6B", whiteSpace: "nowrap", paddingTop: 2 }}>
+                      {dateStr} {timeStr}
                     </div>
-                    <div style={{ fontSize: 12, color: "#555", display: "flex", gap: 10 }}>
-                      <span>{m.scentType}</span>
-                      <span>{m.temperature}°C</span>
-                      <span>湿度{m.humidity}%</span>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "#1A1915", marginBottom: 2 }}>
+                        {m.locationName}
+                      </div>
+                      <div style={{ fontSize: 12, color: "#8C7B6B", display: "flex", gap: 10 }}>
+                        <span>{m.scentType}</span>
+                        <span>{m.temperature}°C</span>
+                        <span>湿度{m.humidity}%</span>
+                      </div>
                     </div>
+                    <IntensityBar value={m.intensity} />
                   </div>
-                  <IntensityBar value={m.intensity} />
-                </div>
-              )
-            })}
+                )
+              })}
+          </div>
         </div>
       </div>
     </>

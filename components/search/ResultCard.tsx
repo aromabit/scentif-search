@@ -24,16 +24,16 @@ export function ResultCard({
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick() }}
       style={{
-        padding: "12px 16px",
-        borderBottom: "1px solid #e8e8e8",
+        padding: "14px 16px",
+        borderBottom: "1px solid #F0EDE8",
         cursor: "pointer",
-        background: selected ? "#e8f0fe" : "white",
-        borderLeft: selected ? "3px solid #1a73e8" : "3px solid transparent",
+        background: selected ? "#FDF5F1" : "white",
+        borderLeft: selected ? "3px solid #D97757" : "3px solid transparent",
         transition: "background 0.15s",
       }}
     >
       {measurement.imageUrl && (
-        <div style={{ position: "relative", width: "100%", height: 160, marginBottom: 10, borderRadius: 8, overflow: "hidden" }}>
+        <div style={{ position: "relative", width: "100%", height: 160, marginBottom: 12, borderRadius: 10, overflow: "hidden" }}>
           <Image
             src={measurement.imageUrl}
             alt={measurement.locationName}
@@ -43,33 +43,34 @@ export function ResultCard({
           />
         </div>
       )}
-      <div style={{ fontWeight: 600, fontSize: 15, color: "#1a0dab", marginBottom: 2 }}>
+      <div style={{ fontWeight: 600, fontSize: 15, color: "#1A1915", marginBottom: 2 }}>
         {measurement.locationName}
       </div>
-      <div style={{ fontSize: 12, color: "#70757a", marginBottom: 6 }}>{measurement.address}</div>
+      <div style={{ fontSize: 12, color: "#8C7B6B", marginBottom: 8 }}>{measurement.address}</div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginBottom: 6 }}>
-        <span style={{ fontSize: 12, color: "#444" }}>📅 {dateStr} {timeStr}</span>
-        <span style={{ fontSize: 12, color: "#444" }}>📍 {measurement.lat.toFixed(4)}, {measurement.lng.toFixed(4)}</span>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 14px", marginBottom: 8 }}>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>📅 {dateStr} {timeStr}</span>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>📍 {measurement.lat.toFixed(4)}, {measurement.lng.toFixed(4)}</span>
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginBottom: 6 }}>
-        <span style={{ fontSize: 12, color: "#444" }}>🌡 {measurement.temperature}°C</span>
-        <span style={{ fontSize: 12, color: "#444" }}>💧 {measurement.humidity}%</span>
-        <span style={{ fontSize: 12, color: "#444" }}>☀️ {measurement.illuminance.toLocaleString()}lx</span>
-        <span style={{ fontSize: 12, color: "#444" }}>💨 {measurement.windSpeed}m/s</span>
-        <span style={{ fontSize: 12, color: "#444" }}>🔊 {measurement.soundLevel}dB</span>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 14px", marginBottom: 8 }}>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>🌡 {measurement.temperature}°C</span>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>💧 {measurement.humidity}%</span>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>☀️ {measurement.illuminance.toLocaleString()}lx</span>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>💨 {measurement.windSpeed}m/s</span>
+        <span style={{ fontSize: 12, color: "#6B6459" }}>🔊 {measurement.soundLevel}dB</span>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
         <span
           style={{
             display: "inline-block",
             fontSize: 11,
-            background: "#f1f3f4",
-            color: "#555",
-            padding: "2px 8px",
+            background: "#FFF0E8",
+            color: "#A0522D",
+            padding: "3px 10px",
             borderRadius: 12,
+            fontWeight: 500,
           }}
         >
           {measurement.scentType}
@@ -77,7 +78,7 @@ export function ResultCard({
         <IntensityBar value={measurement.intensity} />
       </div>
 
-      <div style={{ fontSize: 13, color: "#444", lineHeight: 1.5 }}>{measurement.notes}</div>
+      <div style={{ fontSize: 13, color: "#6B6459", lineHeight: 1.6 }}>{measurement.notes}</div>
     </div>
   )
 }

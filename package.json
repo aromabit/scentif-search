@@ -1,7 +1,7 @@
 {
   "name": "scentif-search",
   "version": "1.0.0",
-  "description": "",
+  "description": "匂いを検索できるサービス",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",

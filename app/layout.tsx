@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css"
 
 export const metadata = {
   title: "Scentif Search",
-  description: "香りのお店を探せる検索サービス",
+  description: "匂いを検索できるサービス",
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

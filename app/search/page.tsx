@@ -53,6 +53,7 @@ function SearchResults() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const query = searchParams.get("q") ?? ""
+  const measuredAt = searchParams.get("measured_at")
 
   const results = useMemo(() => searchMeasurements(query), [query])
   const [selectedEntry, setSelectedEntry] = useState<{
@@ -74,7 +75,10 @@ function SearchResults() {
     setShowMeasureModal(false)
     const r =
       allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
-    router.push(`/search?q=${encodeURIComponent(r.scentType.split("・")[0])}`)
+    const now = new Date().toISOString()
+    router.push(
+      `/search?q=${encodeURIComponent(r.scentType.split("・")[0])}&measured_at=${encodeURIComponent(now)}`
+    )
   }
 
   return (
@@ -133,7 +137,10 @@ function SearchResults() {
           background: "white",
         }}
       >
-        「{query}」の測定記録 — {results.length} 件
+        {measuredAt
+          ? `${new Date(measuredAt).toLocaleString("ja-JP", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}の測定に近い測定記録 — ${results.length} 件`
+          : `「${query}」に近い測定記録 — ${results.length} 件`
+        }
       </div>
 
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>

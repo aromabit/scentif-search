@@ -461,14 +461,25 @@ export const measurements: Measurement[] = [
   },
 ]
 
-export function searchMeasurements(query: string): Measurement[] {
+export function searchMeasurements(query: string, limit = 6): Measurement[] {
   if (!query.trim()) return []
-  const q = query.toLowerCase()
-  return measurements.filter(
-    (m) =>
-      m.locationName.toLowerCase().includes(q) ||
-      m.address.toLowerCase().includes(q) ||
-      m.scentType.toLowerCase().includes(q) ||
-      m.notes.toLowerCase().includes(q)
-  )
+  const terms = query.toLowerCase().split(/[\s・,、]+/).filter(Boolean)
+
+  const scored = measurements.map((m) => {
+    let score = 0
+    const scentTokens = m.scentType.toLowerCase().split("・")
+    for (const term of terms) {
+      if (scentTokens.some((t) => t.includes(term) || term.includes(t))) score += 10
+      else if (m.scentType.toLowerCase().includes(term)) score += 6
+      if (m.locationName.toLowerCase().includes(term)) score += 4
+      if (m.notes.toLowerCase().includes(term)) score += 2
+      if (m.address.toLowerCase().includes(term)) score += 1
+    }
+    return { m, score }
+  })
+
+  return scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ m }) => m)
 }

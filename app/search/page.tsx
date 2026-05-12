@@ -3,7 +3,10 @@
 import { Suspense, useState, useMemo } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
-import { searchMeasurements, measurements as allMeasurements } from "@/data/measurements"
+import {
+  searchMeasurements,
+  measurements as allMeasurements,
+} from "@/data/measurements"
 import { ResultCard } from "@/components/search/ResultCard"
 import { MeasureModal } from "@/components/search/MeasureModal"
 
@@ -41,7 +44,7 @@ function ScentifLogo({ onClick }: { onClick: () => void }) {
         color: "#1A1915",
       }}
     >
-      Scentif
+      Scentif search
     </button>
   )
 }
@@ -52,25 +55,37 @@ function SearchResults() {
   const query = searchParams.get("q") ?? ""
 
   const results = useMemo(() => searchMeasurements(query), [query])
-  const [selectedEntry, setSelectedEntry] = useState<{ query: string; id: string | null }>(() => ({
+  const [selectedEntry, setSelectedEntry] = useState<{
+    query: string
+    id: string | null
+  }>(() => ({
     query,
     id: searchMeasurements(query)[0]?.id ?? null,
   }))
   const [showMeasureModal, setShowMeasureModal] = useState(false)
 
-  const selectedId = selectedEntry.query === query ? selectedEntry.id : (results[0]?.id ?? null)
+  const selectedId =
+    selectedEntry.query === query ? selectedEntry.id : (results[0]?.id ?? null)
   function setSelectedId(id: string | null) {
     setSelectedEntry({ query, id })
   }
 
   function handleMeasureComplete() {
     setShowMeasureModal(false)
-    const r = allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
+    const r =
+      allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
     router.push(`/search?q=${encodeURIComponent(r.scentType.split("・")[0])}`)
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", background: "#FAF9F7" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        background: "#FAF9F7",
+      }}
+    >
       {showMeasureModal && (
         <MeasureModal
           onComplete={handleMeasureComplete}
@@ -109,7 +124,15 @@ function SearchResults() {
         </button>
       </div>
 
-      <div style={{ padding: "8px 20px", fontSize: 12, color: "#8C7B6B", borderBottom: "1px solid #E5E0D8", background: "white" }}>
+      <div
+        style={{
+          padding: "8px 20px",
+          fontSize: 12,
+          color: "#8C7B6B",
+          borderBottom: "1px solid #E5E0D8",
+          background: "white",
+        }}
+      >
         「{query}」の測定記録 — {results.length} 件
       </div>
 
@@ -127,13 +150,34 @@ function SearchResults() {
           {results.length === 0 ? (
             <div style={{ padding: 40, textAlign: "center", color: "#8C7B6B" }}>
               <div style={{ fontSize: 40, marginBottom: 16 }}>🔍</div>
-              <div style={{ fontSize: 15, marginBottom: 8, color: "#1A1915", fontWeight: 500 }}>測定記録が見つかりませんでした</div>
-              <div style={{ fontSize: 13 }}>別のキーワードで試してみてください</div>
-              <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+              <div
+                style={{
+                  fontSize: 15,
+                  marginBottom: 8,
+                  color: "#1A1915",
+                  fontWeight: 500,
+                }}
+              >
+                測定記録が見つかりませんでした
+              </div>
+              <div style={{ fontSize: 13 }}>
+                別のキーワードで試してみてください
+              </div>
+              <div
+                style={{
+                  marginTop: 20,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 8,
+                  justifyContent: "center",
+                }}
+              >
                 {["公園", "海", "市場", "雨上がり"].map((kw) => (
                   <button
                     key={kw}
-                    onClick={() => router.push(`/search?q=${encodeURIComponent(kw)}`)}
+                    onClick={() =>
+                      router.push(`/search?q=${encodeURIComponent(kw)}`)
+                    }
                     style={{
                       padding: "6px 14px",
                       background: "#FAF9F7",

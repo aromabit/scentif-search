@@ -20,7 +20,7 @@ export function MeasureModal({ onComplete, onClose }: { onComplete: () => void; 
       onKeyDown={(e) => { if (e.key === "Escape") onClose() }}
       style={{
         position: "fixed", inset: 0, background: "rgba(26,25,21,.5)",
-        display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100,
+        display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999,
       }}
     >
       <div

@@ -151,7 +151,7 @@ function SearchResults() {
             overflowY: "auto",
             borderRight: "1.5px solid #E5E0D8",
             flexShrink: 0,
-            background: "white",
+            background: "#F5F2EE",
           }}
         >
           {results.length === 0 ? (

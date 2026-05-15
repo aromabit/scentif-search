@@ -1,5 +1,5 @@
 import "./reset.css"
-import "leaflet/dist/leaflet.css"
+import "maplibre-gl/dist/maplibre-gl.css"
 
 export const metadata = {
   title: "Scentif Search",

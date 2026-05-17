@@ -28,7 +28,10 @@ export default function MapView({ measurements, selectedId, onSelect }: Props) {
   const mapRef = useRef<maplibregl.Map | null>(null)
   const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map())
   const onSelectRef = useRef(onSelect)
-  onSelectRef.current = onSelect
+
+  useEffect(() => {
+    onSelectRef.current = onSelect
+  })
 
   useEffect(() => {
     if (!containerRef.current) return

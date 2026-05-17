@@ -14,6 +14,8 @@ export type Measurement = {
   lat: number
   lng: number
   imageUrl?: string
+  // [0]: (soundLevel - 28) / 57  [1]: humidity / 100
+  vector: [number, number]
 }
 
 export const measurements: Measurement[] = [
@@ -33,6 +35,7 @@ export const measurements: Measurement[] = [
     lat: 35.6717,
     lng: 139.6952,
     imageUrl: "https://picsum.photos/seed/yoyogi/600/300",
+    vector: [0.35, 0.62],
   },
   {
     id: "2",
@@ -50,6 +53,7 @@ export const measurements: Measurement[] = [
     lat: 35.6655,
     lng: 139.7706,
     imageUrl: "https://picsum.photos/seed/tsukiji/600/300",
+    vector: [0.77, 0.71],
   },
   {
     id: "3",
@@ -67,6 +71,7 @@ export const measurements: Measurement[] = [
     lat: 35.7328,
     lng: 139.7466,
     imageUrl: "https://picsum.photos/seed/rikugien/600/300",
+    vector: [0.25, 0.48],
   },
   {
     id: "4",
@@ -84,6 +89,7 @@ export const measurements: Measurement[] = [
     lat: 35.6595,
     lng: 139.7005,
     imageUrl: "https://picsum.photos/seed/shibuya/600/300",
+    vector: [1.00, 0.55],
   },
   {
     id: "5",
@@ -101,6 +107,7 @@ export const measurements: Measurement[] = [
     lat: 35.6558,
     lng: 139.7634,
     imageUrl: "https://picsum.photos/seed/hamarikyu/600/300",
+    vector: [0.47, 0.67],
   },
   {
     id: "6",
@@ -118,6 +125,7 @@ export const measurements: Measurement[] = [
     lat: 35.7019,
     lng: 139.7395,
     imageUrl: "https://picsum.photos/seed/kagurazaka/600/300",
+    vector: [0.58, 0.59],
   },
   {
     id: "7",
@@ -135,6 +143,7 @@ export const measurements: Measurement[] = [
     lat: 35.6296,
     lng: 139.7747,
     imageUrl: "https://picsum.photos/seed/odaiba/600/300",
+    vector: [0.61, 0.70],
   },
   {
     id: "8",
@@ -152,6 +161,7 @@ export const measurements: Measurement[] = [
     lat: 35.7268,
     lng: 139.7681,
     imageUrl: "https://picsum.photos/seed/yanaka/600/300",
+    vector: [0.70, 0.52],
   },
   {
     id: "9",
@@ -169,6 +179,7 @@ export const measurements: Measurement[] = [
     lat: 35.6996,
     lng: 139.5752,
     imageUrl: "https://picsum.photos/seed/inokashira/600/300",
+    vector: [0.28, 0.74],
   },
   {
     id: "10",
@@ -186,6 +197,7 @@ export const measurements: Measurement[] = [
     lat: 35.6693,
     lng: 139.7638,
     imageUrl: "https://picsum.photos/seed/ginza/600/300",
+    vector: [0.74, 0.44],
   },
   {
     id: "11",
@@ -203,6 +215,7 @@ export const measurements: Measurement[] = [
     lat: 35.6796,
     lng: 139.7700,
     imageUrl: "https://picsum.photos/seed/yaesu/600/300",
+    vector: [0.81, 0.49],
   },
   {
     id: "12",
@@ -220,6 +233,7 @@ export const measurements: Measurement[] = [
     lat: 35.6913,
     lng: 139.7035,
     imageUrl: "https://picsum.photos/seed/isetan/600/300",
+    vector: [0.67, 0.45],
   },
   {
     id: "13",
@@ -237,6 +251,7 @@ export const measurements: Measurement[] = [
     lat: 35.7153,
     lng: 139.7756,
     imageUrl: "https://picsum.photos/seed/nmwa/600/300",
+    vector: [0.07, 0.50],
   },
   {
     id: "14",
@@ -254,6 +269,7 @@ export const measurements: Measurement[] = [
     lat: 35.6487,
     lng: 139.7031,
     imageUrl: "https://picsum.photos/seed/daikanyama/600/300",
+    vector: [0.23, 0.42],
   },
   {
     id: "15",
@@ -271,6 +287,7 @@ export const measurements: Measurement[] = [
     lat: 35.6455,
     lng: 139.7824,
     imageUrl: "https://picsum.photos/seed/toyosu/600/300",
+    vector: [0.88, 0.88],
   },
   {
     id: "16",
@@ -288,6 +305,7 @@ export const measurements: Measurement[] = [
     lat: 35.6896,
     lng: 139.7006,
     imageUrl: "https://picsum.photos/seed/shinjuku-ug/600/300",
+    vector: [0.72, 0.57],
   },
   {
     id: "17",
@@ -305,6 +323,7 @@ export const measurements: Measurement[] = [
     lat: 35.6986,
     lng: 139.7714,
     imageUrl: "https://picsum.photos/seed/akihabara/600/300",
+    vector: [0.75, 0.38],
   },
   {
     id: "18",
@@ -322,6 +341,7 @@ export const measurements: Measurement[] = [
     lat: 35.7086,
     lng: 139.7746,
     imageUrl: "https://picsum.photos/seed/ameyoko/600/300",
+    vector: [0.65, 0.61],
   },
   {
     id: "19",
@@ -339,6 +359,7 @@ export const measurements: Measurement[] = [
     lat: 35.7148,
     lng: 139.7967,
     imageUrl: "https://picsum.photos/seed/sensoji/600/300",
+    vector: [0.18, 0.53],
   },
   {
     id: "20",
@@ -356,6 +377,7 @@ export const measurements: Measurement[] = [
     lat: 35.7303,
     lng: 139.7110,
     imageUrl: "https://picsum.photos/seed/ikebukuro-tobu/600/300",
+    vector: [0.68, 0.56],
   },
   {
     id: "21",
@@ -373,6 +395,7 @@ export const measurements: Measurement[] = [
     lat: 35.6766,
     lng: 139.7637,
     imageUrl: "https://picsum.photos/seed/tifo/600/300",
+    vector: [0.47, 0.43],
   },
   {
     id: "22",
@@ -390,6 +413,7 @@ export const measurements: Measurement[] = [
     lat: 35.6652,
     lng: 139.7276,
     imageUrl: "https://picsum.photos/seed/nact/600/300",
+    vector: [0.14, 0.47],
   },
   {
     id: "23",
@@ -407,6 +431,7 @@ export const measurements: Measurement[] = [
     lat: 35.6587,
     lng: 139.7030,
     imageUrl: "https://picsum.photos/seed/hikarie/600/300",
+    vector: [0.53, 0.50],
   },
   {
     id: "24",
@@ -424,6 +449,7 @@ export const measurements: Measurement[] = [
     lat: 35.7058,
     lng: 139.7518,
     imageUrl: "https://picsum.photos/seed/tokyodome/600/300",
+    vector: [0.95, 0.62],
   },
   {
     id: "25",
@@ -441,6 +467,7 @@ export const measurements: Measurement[] = [
     lat: 35.6748,
     lng: 139.7636,
     imageUrl: "https://picsum.photos/seed/yurakucho/600/300",
+    vector: [0.42, 0.41],
   },
   {
     id: "26",
@@ -458,8 +485,24 @@ export const measurements: Measurement[] = [
     lat: 35.6757,
     lng: 139.7458,
     imageUrl: "https://picsum.photos/seed/ndl/600/300",
+    vector: [0.00, 0.50],
   },
 ]
+
+export function findSimilarByVector(
+  inputVector: [number, number],
+  limit = 6
+): Measurement[] {
+  return measurements
+    .map((m) => {
+      const dx = m.vector[0] - inputVector[0]
+      const dy = m.vector[1] - inputVector[1]
+      return { m, distance: Math.sqrt(dx * dx + dy * dy) }
+    })
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, limit)
+    .map(({ m }) => m)
+}
 
 export function searchMeasurements(query: string, limit = 6): Measurement[] {
   if (!query.trim()) return []

@@ -25,14 +25,26 @@ const DOTS = [
   { v: 4, dur: "2.3s", del: "5.7s" }, { v: 3, dur: "3.8s", del: "0.5s" }, { v: 0, dur: "1.5s", del: "9.2s" },
 ]
 
-export function MeasureModal({ onComplete, onClose }: { onComplete: () => void; onClose: () => void }) {
+export function MeasureModal({
+  onComplete,
+  onClose,
+}: {
+  onComplete: (vector: [number, number]) => void
+  onClose: () => void
+}) {
   const [phase, setPhase] = useState<"ready" | "measuring" | "done">("ready")
 
   function start() {
     setPhase("measuring")
     setTimeout(() => {
       setPhase("done")
-      setTimeout(onComplete, 800)
+      setTimeout(() => {
+        const vector: [number, number] = [
+          parseFloat(Math.random().toFixed(2)),
+          parseFloat(Math.random().toFixed(2)),
+        ]
+        onComplete(vector)
+      }, 800)
     }, 10000)
   }
 

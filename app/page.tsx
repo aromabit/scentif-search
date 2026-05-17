@@ -18,11 +18,9 @@ export default function Page() {
     router.push(`/search?q=${encodeURIComponent(trimmed)}`)
   }
 
-  function handleMeasureComplete() {
+  function handleMeasureComplete(vector: [number, number]) {
     setShowMeasureModal(false)
-    const r =
-      allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
-    router.push(`/search?q=${encodeURIComponent(r.scentType.split("・")[0])}`)
+    router.push(`/search?vx=${vector[0]}&vy=${vector[1]}`)
   }
 
   return (

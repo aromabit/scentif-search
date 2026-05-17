@@ -3,10 +3,7 @@
 import { Suspense, useState, useMemo } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
-import {
-  searchMeasurements,
-  measurements as allMeasurements,
-} from "@/data/measurements"
+import { searchMeasurements, findSimilarByVector } from "@/data/measurements"
 import { ResultCard } from "@/components/search/ResultCard"
 import { MeasureModal } from "@/components/search/MeasureModal"
 
@@ -54,15 +51,28 @@ function SearchResults() {
   const searchParams = useSearchParams()
   const query = searchParams.get("q") ?? ""
   const measuredAt = searchParams.get("measured_at")
+  const vx = searchParams.get("vx")
+  const vy = searchParams.get("vy")
+  const inputVector: [number, number] | null =
+    vx !== null && vy !== null ? [parseFloat(vx), parseFloat(vy)] : null
 
-  const results = useMemo(() => searchMeasurements(query), [query])
+  const results = useMemo(
+    () =>
+      inputVector
+        ? findSimilarByVector(inputVector)
+        : searchMeasurements(query),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [query, vx, vy]
+  )
   const [selectedEntry, setSelectedEntry] = useState<{
     query: string
     id: string | null
-  }>(() => ({
-    query,
-    id: searchMeasurements(query)[0]?.id ?? null,
-  }))
+  }>(() => {
+    const initial = inputVector
+      ? findSimilarByVector(inputVector)[0]
+      : searchMeasurements(query)[0]
+    return { query, id: initial?.id ?? null }
+  })
   const [showMeasureModal, setShowMeasureModal] = useState(false)
 
   const selectedId =
@@ -71,13 +81,11 @@ function SearchResults() {
     setSelectedEntry({ query, id })
   }
 
-  function handleMeasureComplete() {
+  function handleMeasureComplete(vector: [number, number]) {
     setShowMeasureModal(false)
-    const r =
-      allMeasurements[Math.floor(Math.random() * allMeasurements.length)]
     const now = new Date().toISOString()
     router.push(
-      `/search?q=${encodeURIComponent(r.scentType.split("・")[0])}&measured_at=${encodeURIComponent(now)}`
+      `/search?vx=${vector[0]}&vy=${vector[1]}&measured_at=${encodeURIComponent(now)}`
     )
   }
 
@@ -137,8 +145,8 @@ function SearchResults() {
           background: "white",
         }}
       >
-        {measuredAt
-          ? `${new Date(measuredAt).toLocaleString("ja-JP", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}の測定に近い測定記録 — ${results.length} 件`
+        {inputVector
+          ? `${measuredAt ? new Date(measuredAt).toLocaleString("ja-JP", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) + "の" : ""}測定値に近い記録 — ${results.length} 件`
           : `「${query}」に近い測定記録 — ${results.length} 件`
         }
       </div>
